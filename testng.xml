@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CalculatorTestSuite">
+  <listeners>
+    <listener class-name="vention.com.TestLogger"/>
+  </listeners>
+  <test name="CalculatorTests">
+    <classes>
+      <class name="vention.com.CalculatorTest" />
+    </classes>
+  </test>
+</suite>
+
