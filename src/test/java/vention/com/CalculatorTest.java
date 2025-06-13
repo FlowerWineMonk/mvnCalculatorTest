@@ -11,18 +11,22 @@ public class CalculatorTest {
     System.out.println("Initializing Calculator instance.");
     calc = new Calculator();
   }
+
   @AfterClass
   public void afterClass() {
     System.out.println("Finished all tests.");
   }
+
   @BeforeMethod
   public void beforeMethod(){
     System.out.println("Starting a test...");
   }
+
   @AfterMethod
   public void afterMethod(){
     System.out.println("Test completed.");
   }
+
   @DataProvider(name = "addData")
   public Object[][] createData() {
     return new Object[][] {
@@ -35,26 +39,26 @@ public class CalculatorTest {
 
   @Test(dataProvider = "addData")
   public void testAdd(int a, int b, int expected) {
-    assertEquals(calc.add(a, b), expected);
+    assertEquals(calc.add(a, b), expected, "Addition failed for inputs: " + a + " + " + b);
   }
 
   @Test
   public void testSubtract() {
-    assertEquals(calc.subtract(10, 5), 5);
+    assertEquals(calc.subtract(10, 5), 5, "Subtraction failed for inputs: 10 - 5");
   }
 
   @Test
   public void testMultiply() {
-    assertEquals(calc.multiply(5, 2), 10);
+    assertEquals(calc.multiply(5, 2), 10, "Multiplication failed for inputs: 5 * 2");
   }
 
   @Test(dependsOnMethods = { "testMultiply" })
   public void testDivide() {
-    assertEquals(calc.divide(10, 2), 5);
+   assertEquals(calc.divide(10, 2), 5, "Division failed for inputs: 10 / 2");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDivideByZero() {
-    calc.divide(5,0);
+    calc.divide(5, 0);
   }
 }
