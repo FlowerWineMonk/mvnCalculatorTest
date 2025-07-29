@@ -22,3 +22,17 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn clean test
+
+      - name: Check for Test Failures
+        run: |
+          if grep -q "<test-method.*status=\"FAIL\"" target/surefire-reports/testng-results.xml; then
+            echo "Test failures detected in TestNG XML report."
+            exit 1
+          fi
+
+      - name: Upload TestNG Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-html-report
+          path: target/surefire-reports/emailable-report.html
